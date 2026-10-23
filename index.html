@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GramHealth - AI-Assisted Rural Healthcare Access, Symptom Screening & Facility Finder">
+  <meta name="theme-color" content="#0f766e">
+  <title>GramHealth | ग्राम स्वास्थ्य - Rural Healthcare Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOP EMERGENCY BANNER -->
+  <aside class="emergency-bar" role="complementary" aria-label="Emergency hotlines">
+    <div class="container emergency-flex">
+      <div class="emergency-left">
+        <span class="emergency-badge" data-i18n="emergencyAlert">EMERGENCY HOTLINE</span>
+        <span class="emergency-text" data-i18n="emergencyBannerText">Medical Emergency: Dial <strong>108</strong> (Free 24x7 Ambulance) | Pregnant Mothers & Newborns: <strong>102</strong></span>
+      </div>
+      <div class="emergency-right">
+        <a href="tel:108" class="emergency-call-btn" aria-label="Call 108 Ambulance">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+          <span data-i18n="call108">Call 108</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN HEADER / NAVBAR -->
+  <header class="site-header">
+    <div class="container header-flex">
+      <div class="brand-group">
+        <a href="#home" class="brand-logo" id="brandLink">
+          <div class="logo-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">GramHealth <span class="hindi-brand">ग्राम स्वास्थ्य</span></span>
+            <span class="brand-tagline" data-i18n="brandTagline">Rural Healthcare Access &amp; Early Screening</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- HEADER CONTROLS (Language Toggle & Mobile Menu) -->
+      <div class="header-controls">
+        <!-- Language Switcher -->
+        <div class="lang-switch-wrapper" role="group" aria-label="Language selector">
+          <button type="button" class="lang-btn active" id="langEnBtn" aria-pressed="true">English</button>
+          <span class="lang-divider" aria-hidden="true">/</span>
+          <button type="button" class="lang-btn" id="langHiBtn" aria-pressed="false">हिंदी</button>
+        </div>
+
+        <!-- Offline / Bandwidth indicator -->
+        <span class="badge-low-bw" title="Lightweight &amp; works offline" data-i18n="lowBwBadge">⚡ Low Bandwidth</span>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="mobile-toggle" id="mobileMenuBtn" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PRIMARY NAVIGATION TABS -->
+    <nav class="nav-bar" id="primaryNav" aria-label="Primary site navigation">
+      <div class="container">
+        <ul class="nav-list" role="tablist">
+          <li role="presentation"><button type="button" class="nav-link active" data-tab="home" role="tab" aria-selected="true" id="tab-home" data-i18n="navHome">Dashboard</button></li>
+          <li role="presentation"><button type="button" class="nav-link" data-tab="screening" role="tab" aria-selected="false" id="tab-screening" data-i18n="navScreening">Symptom Screener</button></li>
+          <li role="presentation"><button type="button" class="nav-link" data-tab="facilities" role="tab" aria-selected="false" id="tab-facilities" data-i18n="navFacilities">Find Health Centers</button></li>
+          <li role="presentation"><button type="button" class="nav-link" data-tab="education" role="tab" aria-selected="false" id="tab-education" data-i18n="navEducation">Health Education</button></li>
+          <li role="presentation"><button type="button" class="nav-link" data-tab="reminders" role="tab" aria-selected="false" id="tab-reminders" data-i18n="navReminders">Reminders &amp; Camps</button></li>
+          <li role="presentation"><button type="button" class="nav-link" data-tab="helplines" role="tab" aria-selected="false" id="tab-helplines" data-i18n="navHelplines">Emergency Contacts</button></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="main-content" id="mainContent">
+
+    <!-- 1. DASHBOARD TAB -->
+    <section id="panel-home" class="tab-panel active" role="tabpanel" aria-labelledby="tab-home">
+      <div class="container">
+        <!-- Hero Banner -->
+        <div class="hero-card">
+          <div class="hero-badge" data-i18n="heroBadge">Free Community Health Portal</div>
+          <h1 class="hero-title" data-i18n="heroTitle">Healthcare Guidance for Every Village</h1>
+          <p class="hero-subtext" data-i18n="heroSubtext">Early risk screening, primary healthcare facility guidance, and essential health information designed for rural India. Works fast even on 2G/3G connections.</p>
+          
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" onclick="app.switchTab('screening')" data-i18n="heroBtnScreening">Check Symptoms Now</button>
+            <button type="button" class="btn btn-outline" onclick="app.switchTab('facilities')" data-i18n="heroBtnFacilities">Locate Nearest Hospital</button>
+          </div>
+        </div>
+
+        <!-- Mandatory Medical Ethics & Safety Disclaimer Banner -->
+        <div class="notice-card notice-warning" role="alert">
+          <div class="notice-icon" aria-hidden="true">⚠️</div>
+          <div class="notice-body">
+            <h2 class="notice-title" data-i18n="disclaimerTitle">Important Medical Disclaimer</h2>
+            <p class="notice-text" data-i18n="disclaimerText">GramHealth is a preliminary, educational, rule-based screening prototype. <strong>It cannot diagnose diseases, prescribe medication, or replace a licensed doctor, ASHA worker, or ANM.</strong> If you experience severe chest pain, extreme breathlessness, or heavy bleeding, visit the nearest emergency facility or call <strong>108</strong> immediately.</p>
+          </div>
+        </div>
+
+        <!-- Quick Module Feature Cards -->
+        <div class="feature-grid">
+          <!-- Card 1: Screener -->
+          <article class="feature-card" onclick="app.switchTab('screening')">
+            <div class="card-icon screener-color" aria-hidden="true">🩺</div>
+            <h2 class="card-title" data-i18n="cardScreenerTitle">Symptom Screening</h2>
+            <p class="card-desc" data-i18n="cardScreenerDesc">Answer simple questions to receive transparent, rule-based triage guidance and decide when to visit a clinic.</p>
+            <span class="card-link" data-i18n="cardStartNow">Start screening &rarr;</span>
+          </article>
+
+          <!-- Card 2: Health Centers -->
+          <article class="feature-card" onclick="app.switchTab('facilities')">
+            <div class="card-icon hospital-color" aria-hidden="true">🏥</div>
+            <h2 class="card-title" data-i18n="cardHospitalTitle">Find Health Facilities</h2>
+            <p class="card-desc" data-i18n="cardHospitalDesc">Locate Sub-Centres, PHCs, CHCs, and District Hospitals using your PIN code or OpenStreetMap data.</p>
+            <span class="card-link" data-i18n="cardFindCenter">Find centers &rarr;</span>
+          </article>
+
+          <!-- Card 3: Health Education -->
+          <article class="feature-card" onclick="app.switchTab('education')">
+            <div class="card-icon edu-color" aria-hidden="true">📖</div>
+            <h2 class="card-title" data-i18n="cardEduTitle">Preventive Health Guides</h2>
+            <p class="card-desc" data-i18n="cardEduDesc">Read simple, verified community health guides in Hindi and English on ORS, nutrition, seasonal illnesses and hygiene.</p>
+            <span class="card-link" data-i18n="cardReadGuides">Read guides &rarr;</span>
+          </article>
+
+          <!-- Card 4: Reminders & Camps -->
+          <article class="feature-card" onclick="app.switchTab('reminders')">
+            <div class="card-icon reminder-color" aria-hidden="true">📅</div>
+            <h2 class="card-title" data-i18n="cardReminderTitle">Reminders &amp; Camps</h2>
+            <p class="card-desc" data-i18n="cardReminderDesc">Keep track of maternal checkups, child vaccinations, and upcoming rural health camps stored locally on your device.</p>
+            <span class="card-link" data-i18n="cardManageReminders">Open schedule &rarr;</span>
+          </article>
+        </div>
+
+        <!-- Trust & Rural Accessibility Highlights -->
+        <div class="info-strip">
+          <div class="strip-item">
+            <span class="strip-icon">🔒</span>
+            <div>
+              <strong data-i18n="privacyHeading">Device-First Privacy</strong>
+              <p data-i18n="privacySub">No sensitive medical data is sold or stored on external cloud databases. Reminders stay in your phone's browser.</p>
+            </div>
+          </div>
+          <div class="strip-item">
+            <span class="strip-icon">📶</span>
+            <div>
+              <strong data-i18n="offlineHeading">Low-Bandwidth Optimized</strong>
+              <p data-i18n="offlineSub">No bloated libraries or heavy downloads. Fast response on rural cellular networks.</p>
+            </div>
+          </div>
+          <div class="strip-item">
+            <span class="strip-icon">⚖️</span>
+            <div>
+              <strong data-i18n="rulesHeading">Transparent Rule Logic</strong>
+              <p data-i18n="rulesSub">Clear screening logic based on standard community health protocols, avoiding unsafe black-box AI claims.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SYMPTOM SCREENING TAB -->
+    <section id="panel-screening" class="tab-panel" role="tabpanel" aria-labelledby="tab-screening" hidden>
+      <div class="container">
+        <div class="section-header">
+          <div class="header-icon-pill">🩺</div>
+          <div>
+            <h1 class="section-title" data-i18n="screenerHeader">Preliminary Health Risk Screener</h1>
+            <p class="section-subtitle" data-i18n="screenerSub">Answer simple questions to understand the urgency of your symptoms. This tool provides preliminary guidance only.</p>
+          </div>
+        </div>
+
+        <div class="screener-layout">
+          <!-- Screener Form -->
+          <div class="screener-form-card">
+            <form id="screeningForm" novalidate>
+              
+              <!-- Patient Demographics -->
+              <fieldset class="form-group">
+                <legend class="group-title" data-i18n="demographicsTitle">1. Patient Information</legend>
+                
+                <div class="form-row">
+                  <div class="form-col">
+                    <label for="patientAgeGroup" class="form-label" data-i18n="lblAge">Age Group *</label>
+                    <select id="patientAgeGroup" class="form-input" required aria-required="true">
+                      <option value="" data-i18n="optSelectAge">-- Select Age Group --</option>
+                      <option value="infant" data-i18n="optInfant">Infant / Toddler (Below 2 years)</option>
+                      <option value="child" data-i18n="optChild">Child (2 - 12 years)</option>
+                      <option value="adult" data-i18n="optAdult">Adult (13 - 59 years)</option>
+                      <option value="elderly" data-i18n="optElderly">Senior Citizen (60+ years)</option>
+                    </select>
+                    <div class="field-error" id="errAge" aria-live="polite"></div>
+                  </div>
+
+                  <div class="form-col">
+                    <label for="symptomDuration" class="form-label" data-i18n="lblDuration">Symptom Duration *</label>
+                    <select id="symptomDuration" class="form-input" required aria-required="true">
+                      <option value="" data-i18n="optSelectDuration">-- Select Duration --</option>
+                      <option value="under24" data-i18n="optUnder24">Less than 24 hours</option>
+                      <option value="days1to3" data-i18n="optDays1to3">1 to 3 days</option>
+                      <option value="days4to7" data-i18n="optDays4to7">4 to 7 days</option>
+                      <option value="overWeek" data-i18n="optOverWeek">More than 1 week</option>
+                    </select>
+                    <div class="field-error" id="errDuration" aria-live="polite"></div>
+                  </div>
+                </div>
+
+                <div class="form-row" style="margin-top: 10px;">
+                  <div class="form-col">
+                    <label class="checkbox-pill">
+                      <input type="checkbox" id="isPregnant" name="specialCondition" value="pregnant">
+                      <span data-i18n="lblPregnant">Patient is pregnant or recently delivered (< 6 weeks)</span>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Critical Red Flags Warning Signs -->
+              <fieldset class="form-group warning-fieldset">
+                <legend class="group-title text-danger">
+                  <span aria-hidden="true">🚨</span> <span data-i18n="redFlagsTitle">2. Emergency Warning Signs (Check all that apply)</span>
+                </legend>
+                <p class="fieldset-helper" data-i18n="redFlagsHelper">If any of these severe signs are present, the patient requires immediate urgent medical care:</p>
+                
+                <div class="checkbox-grid">
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="difficulty_breathing">
+                    <span class="chk-label" data-i18n="rfBreathing">Severe difficulty breathing / fast chest indrawing</span>
+                  </label>
+
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="chest_pain">
+                    <span class="chk-label" data-i18n="rfChestPain">Persistent chest pressure, pain, or heaviness</span>
+                  </label>
+
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="confusion_fainting">
+                    <span class="chk-label" data-i18n="rfConfusion">Confusion, drowsiness, fainting, or inability to wake</span>
+                  </label>
+
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="dehydration_severe">
+                    <span class="chk-label" data-i18n="rfDehydration">Cannot drink fluids / sunken eyes / no urine for 8+ hours</span>
+                  </label>
+
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="bluish_skin">
+                    <span class="chk-label" data-i18n="rfBluish">Bluish lips, tongue, face, or fingernails</span>
+                  </label>
+
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="severe_bleeding">
+                    <span class="chk-label" data-i18n="rfBleeding">Severe uncontrolled bleeding or coughing up blood</span>
+                  </label>
+
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="stiff_neck">
+                    <span class="chk-label" data-i18n="rfStiffNeck">High fever accompanied by a stiff neck and light sensitivity</span>
+                  </label>
+
+                  <label class="checkbox-card danger-card">
+                    <input type="checkbox" name="warningSigns" value="seizure">
+                    <span class="chk-label" data-i18n="rfSeizures">Seizures / convulsions / sudden limb weakness</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!-- Common Symptoms Selection -->
+              <fieldset class="form-group">
+                <legend class="group-title" data-i18n="symptomsTitle">3. Common Symptoms Experienced</legend>
+                <p class="fieldset-helper" data-i18n="symptomsHelper">Select the primary discomforts the patient is experiencing:</p>
+
+                <div class="checkbox-grid">
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="fever">
+                    <span class="chk-label" data-i18n="symFever">Fever / Chills (बुखार / ठंड लगना)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="cough">
+                    <span class="chk-label" data-i18n="symCough">Cough or Sore Throat (खांसी या गले में खराश)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="diarrhea">
+                    <span class="chk-label" data-i18n="symDiarrhea">Loose watery stools / Vomiting (दस्त या उल्टी)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="stomach_pain">
+                    <span class="chk-label" data-i18n="symStomach">Stomach Pain or Cramps (पेट में दर्द या मरोड़)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="headache">
+                    <span class="chk-label" data-i18n="symHeadache">Headache or Body Aches (सिरदर्द या बदन दर्द)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="skin_rash">
+                    <span class="chk-label" data-i18n="symSkin">Skin Rash, Itching, or Boils (त्वचा पर चकत्ते या खुजली)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="joint_pain">
+                    <span class="chk-label" data-i18n="symJoint">Joint Swelling or Knee Pain (जोड़ों में सूजन या दर्द)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="burning_urination">
+                    <span class="chk-label" data-i18n="symUrination">Burning Urination / Frequent Urge (पेशाब में जलन)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="weakness">
+                    <span class="chk-label" data-i18n="symWeakness">Extreme Fatigue / Loss of Appetite (अत्यधिक कमजोरी / भूख न लगना)</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="symptoms" value="eye_redness">
+                    <span class="chk-label" data-i18n="symEye">Red or Watery Eyes (आंखों में लाली या जलन)</span>
+                  </label>
+                </div>
+                <div class="field-error" id="errSymptoms" aria-live="polite"></div>
+              </fieldset>
+
+              <!-- Form Action Buttons -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="btnEvaluate" data-i18n="btnEvaluate">Evaluate Symptoms</button>
+                <button type="button" class="btn btn-secondary" id="btnResetScreener" data-i18n="btnReset">Reset Form</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Screening Results Panel -->
+          <div class="screener-result-card" id="screeningResultBox" aria-live="polite" style="display: none;">
+            <div id="screeningResultInner">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. HEALTHCARE FACILITY FINDER TAB -->
+    <section id="panel-facilities" class="tab-panel" role="tabpanel" aria-labelledby="tab-facilities" hidden>
+      <div class="container">
+        <div class="section-header">
+          <div class="header-icon-pill">🏥</div>
+          <div>
+            <h1 class="section-title" data-i18n="facilityHeader">Rural Healthcare Facility Finder</h1>
+            <p class="section-subtitle" data-i18n="facilitySub">Find nearby Sub-Centres, Primary Health Centres (PHC), Community Health Centres (CHC), and District Hospitals.</p>
+          </div>
+        </div>
+
+        <!-- Search Controls -->
+        <div class="facility-search-box">
+          <form id="facilitySearchForm" class="search-form" novalidate>
+            <div class="search-input-group">
+              <label for="facilitySearchInput" class="visually-hidden" data-i18n="lblSearchFacility">Search city, town, or 6-digit PIN code</label>
+              <input type="text" id="facilitySearchInput" class="form-input" placeholder="Enter Indian Town, Block, District or 6-digit PIN (e.g. Varanasi, 221001, Sitapur)" aria-label="Enter Indian Town, Block, District or PIN code">
+              <button type="submit" class="btn btn-primary" id="btnSearchFacilities" data-i18n="btnSearch">Search Centers</button>
+            </div>
+            
+            <div class="search-alt-actions">
+              <button type="button" class="btn btn-outline" id="btnUseLocation">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                <span data-i18n="btnUseLocation">Use My Current Location</span>
+              </button>
+              <span class="location-helper-text" data-i18n="locationPrivacyNote">Requires browser permission. Your GPS coordinates are processed solely on your device.</span>
+            </div>
+          </form>
+
+          <!-- Facility Filter Pills -->
+          <div class="filter-pills" role="toolbar" aria-label="Filter facilities by type">
+            <span class="filter-label" data-i18n="filterLabel">Filter Type:</span>
+            <button type="button" class="filter-pill active" data-filter="all" data-i18n="filterAll">All Facilities</button>
+            <button type="button" class="filter-pill" data-filter="PHC" data-i18n="filterPHC">Primary Health Centre (PHC)</button>
+            <button type="button" class="filter-pill" data-filter="CHC" data-i18n="filterCHC">Community Health Centre (CHC)</button>
+            <button type="button" class="filter-pill" data-filter="District Hospital" data-i18n="filterDistrict">District Hospital</button>
+            <button type="button" class="filter-pill" data-filter="Sub Centre" data-i18n="filterSubCentre">Health Sub-Centre</button>
+          </div>
+        </div>
+
+        <!-- OpenStreetMap Attribution & Data Notice -->
+        <div class="osm-attribution-card">
+          <div class="osm-info-icon" aria-hidden="true">ℹ️</div>
+          <div class="osm-info-text">
+            <p data-i18n="osmNotice">Map and facility search connects to public <strong>OpenStreetMap</strong> and Nominatim services. Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> (ODbL). If offline or an area lacks live records, sample community facilities are displayed with explicit unverified demo labeling. Always verify operating hours with your local block administration before traveling.</p>
+          </div>
+        </div>
+
+        <!-- Results Loading State -->
+        <div id="facilityLoading" class="loading-state" style="display: none;" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <p data-i18n="loadingFacilities">Searching nearby healthcare facilities on OpenStreetMap...</p>
+        </div>
+
+        <!-- Status Message (e.g. Geolocation prompt or error) -->
+        <div id="facilityStatusMsg" class="status-banner" style="display: none;" role="status"></div>
+
+        <!-- Results Grid -->
+        <div id="facilityResultsGrid" class="facility-grid" aria-live="polite">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. HEALTH EDUCATION TAB -->
+    <section id="panel-education" class="tab-panel" role="tabpanel" aria-labelledby="tab-education" hidden>
+      <div class="container">
+        <div class="section-header">
+          <div class="header-icon-pill">📚</div>
+          <div>
+            <h1 class="section-title" data-i18n="eduHeader">Preventive Health &amp; First-Aid Education</h1>
+            <p class="section-subtitle" data-i18n="eduSub">Practical, evidence-aligned community health guidelines in simple language. Prevention saves lives.</p>
+          </div>
+        </div>
+
+        <!-- ORS Interactive Calculator Card -->
+        <div class="calculator-card">
+          <div class="calc-header">
+            <span class="calc-badge" data-i18n="orsBadge">Life-Saving First Aid</span>
+            <h2 class="calc-title" data-i18n="orsCalcTitle">Oral Rehydration Salts (ORS) Ratio Guide</h2>
+            <p class="calc-desc" data-i18n="orsCalcDesc">Dehydration from severe diarrhea or vomiting is dangerous, especially in young children. If commercial WHO-ORS packets are not immediately reachable, prepare clean homemade rehydration fluid:</p>
+          </div>
+
+          <div class="calc-body">
+            <div class="calc-input-row">
+              <label for="orsWaterLiters" class="calc-label" data-i18n="lblOrsWater">Clean Boiled &amp; Cooled Water:</label>
+              <div class="calc-input-wrapper">
+                <input type="number" id="orsWaterLiters" min="1" max="10" value="1" class="form-input num-input">
+                <span class="calc-unit" data-i18n="litersUnit">Liter(s)</span>
+              </div>
+            </div>
+
+            <div class="ors-proportions-grid">
+              <div class="proportion-box">
+                <span class="prop-icon">💧</span>
+                <span class="prop-val" id="dispWaterLit">1 Liter</span>
+                <span class="prop-label" data-i18n="orsBoiledWater">Boiled &amp; Cooled Water</span>
+              </div>
+              <div class="proportion-box">
+                <span class="prop-icon">🥄</span>
+                <span class="prop-val" id="dispSugarSpoons">6 Teaspoons</span>
+                <span class="prop-label" data-i18n="orsSugar">Clean Sugar (चीनी)</span>
+              </div>
+              <div class="proportion-box">
+                <span class="prop-icon">🧂</span>
+                <span class="prop-val" id="dispSaltSpoons">1/2 Teaspoon</span>
+                <span class="prop-label" data-i18n="orsSalt">Common Salt (नमक)</span>
+              </div>
+            </div>
+            <p class="calc-warning" data-i18n="orsCaution">⚠️ <em>Do NOT add excess salt or artificial color. Stir until fully dissolved. Give in small sips. Always visit the PHC if vomiting continues or stool has blood.</em></p>
+          </div>
+        </div>
+
+        <!-- Educational Topic Cards Grid -->
+        <div class="edu-grid" id="eduCardsContainer">
+          <!-- Populated by JavaScript to seamlessly handle English & Hindi switching -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. REMINDERS & HEALTH CAMPS TAB -->
+    <section id="panel-reminders" class="tab-panel" role="tabpanel" aria-labelledby="tab-reminders" hidden>
+      <div class="container">
+        <div class="section-header">
+          <div class="header-icon-pill">📅</div>
+          <div>
+            <h1 class="section-title" data-i18n="remindersHeader">Check-Up Reminders &amp; Village Health Camps</h1>
+            <p class="section-subtitle" data-i18n="remindersSub">Never miss a child immunization date, maternal ANC visit, or routine BP/sugar checkup.</p>
+          </div>
+        </div>
+
+        <!-- Privacy Notice Regarding Local Storage -->
+        <div class="notice-card notice-info">
+          <div class="notice-icon" aria-hidden="true">🔒</div>
+          <div class="notice-body">
+            <h2 class="notice-title" data-i18n="remindersPrivacyTitle">Private Device-Only Storage</h2>
+            <p class="notice-text" data-i18n="remindersPrivacyDesc">All reminders created here are saved strictly inside your current web browser storage (localStorage). GramHealth does NOT send your appointments to external servers. Because this is a lightweight static website, reminders are displayed whenever you visit this site on this phone or browser.</p>
+          </div>
+        </div>
+
+        <div class="reminders-layout">
+          <!-- Reminder Creation Form -->
+          <div class="reminder-form-card">
+            <h2 class="sub-heading" data-i18n="addReminderTitle">Add New Health Reminder</h2>
+            <form id="reminderForm" novalidate>
+              <div class="form-group">
+                <label for="reminderTitle" class="form-label" data-i18n="lblReminderTitle">Reason / Checkup Name *</label>
+                <input type="text" id="reminderTitle" class="form-input" placeholder="e.g. Baby Riya 9-Month Measles Vaccine, Mother ANC Checkup" required>
+                <div class="field-error" id="errReminderTitle" aria-live="polite"></div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="reminderDate" class="form-label" data-i18n="lblReminderDate">Date *</label>
+                  <input type="date" id="reminderDate" class="form-input" required>
+                  <div class="field-error" id="errReminderDate" aria-live="polite"></div>
+                </div>
+                <div class="form-col">
+                  <label for="reminderTime" class="form-label" data-i18n="lblReminderTime">Time (Optional)</label>
+                  <input type="time" id="reminderTime" class="form-input">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="reminderType" class="form-label" data-i18n="lblReminderType">Category</label>
+                  <select id="reminderType" class="form-input">
+                    <option value="vaccine" data-i18n="catVaccine">Child Vaccination (टीकाकरण)</option>
+                    <option value="anc" data-i18n="catANC">Maternal ANC Care (गर्भावस्था जांच)</option>
+                    <option value="routine" data-i18n="catRoutine">Routine BP / Sugar Test (सामान्य जांच)</option>
+                    <option value="medicine" data-i18n="catMedicine">Refill Prescription / Medicines (दवा रीफिल)</option>
+                    <option value="other" data-i18n="catOther">Other Health Follow-up (अन्य)</option>
+                  </select>
+                </div>
+                <div class="form-col">
+                  <label for="reminderLocation" class="form-label" data-i18n="lblReminderLocation">Facility / Place (Optional)</label>
+                  <input type="text" id="reminderLocation" class="form-input" placeholder="e.g. Local PHC or Anganwadi">
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 10px;">
+                <label for="reminderNotes" class="form-label" data-i18n="lblReminderNotes">Notes / ASHA Worker Name (Optional)</label>
+                <input type="text" id="reminderNotes" class="form-input" placeholder="e.g. Carry Mother-Child Protection Card, fast from 8 AM">
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="btnSaveReminder" data-i18n="btnSaveReminder">Save Reminder to Device</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Active Reminders List -->
+          <div class="reminders-list-card">
+            <div class="list-header">
+              <h2 class="sub-heading" data-i18n="myRemindersTitle">Your Saved Reminders</h2>
+              <button type="button" class="btn-text-danger" id="btnClearAllReminders" data-i18n="btnClearAll">Clear All</button>
+            </div>
+            
+            <div id="remindersContainer" class="reminders-feed" aria-live="polite">
+              <!-- Rendered by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Health Camps Section -->
+        <div class="camps-section">
+          <div class="camps-header">
+            <div>
+              <h2 class="section-title" data-i18n="campsTitle">Community Health Camps &amp; Drives</h2>
+              <p class="section-subtitle" data-i18n="campsSub">Upcoming diagnostic, screening, and eye-care drives in surrounding rural blocks.</p>
+            </div>
+            <div class="badge-demo" data-i18n="campsDemoBadge">Demo Sample Schedule (Unverified hackathon examples)</div>
+          </div>
+
+          <div class="camp-notice-box">
+            <p data-i18n="campVerificationNotice">⚠️ <strong>Notice:</strong> The events below are illustrative demonstration entries for prototype testing. Always confirm exact dates, timings, and venue with your village Gram Panchayat, ANM, or ASHA worker before attending.</p>
+          </div>
+
+          <div class="camps-grid" id="campsGridContainer">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EMERGENCY CONTACTS TAB -->
+    <section id="panel-helplines" class="tab-panel" role="tabpanel" aria-labelledby="tab-helplines" hidden>
+      <div class="container">
+        <div class="section-header">
+          <div class="header-icon-pill">🚨</div>
+          <div>
+            <h1 class="section-title" data-i18n="helplineHeader">National &amp; State Emergency Helplines</h1>
+            <p class="section-subtitle" data-i18n="helplineSub">Toll-free, 24x7 government telephone helplines available across India from any mobile or landline.</p>
+          </div>
+        </div>
+
+        <div class="helplines-grid">
+          <!-- 108 -->
+          <div class="helpline-card emergency-high">
+            <div class="hl-badge">24x7 Toll-Free</div>
+            <div class="hl-number">108</div>
+            <h2 class="hl-title" data-i18n="hl108Title">National Emergency Ambulance</h2>
+            <p class="hl-desc" data-i18n="hl108Desc">For acute medical emergencies, accidents, sudden severe chest pain, breathing collapse, or trauma.</p>
+            <a href="tel:108" class="btn btn-emergency">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+              <span data-i18n="callNow">Call 108 Now</span>
+            </a>
+          </div>
+
+          <!-- 102 -->
+          <div class="helpline-card">
+            <div class="hl-badge">Free for Mothers &amp; Infants</div>
+            <div class="hl-number">102</div>
+            <h2 class="hl-title" data-i18n="hl102Title">Janani Shishu Suraksha (JSSK)</h2>
+            <p class="hl-desc" data-i18n="hl102Desc">Free ambulance transport for pregnant women in labor, post-delivery drop-back, and sick infants up to 1 year.</p>
+            <a href="tel:102" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+              <span data-i18n="callNow">Call 102 Now</span>
+            </a>
+          </div>
+
+          <!-- 1075 -->
+          <div class="helpline-card">
+            <div class="hl-badge">Ministry of Health</div>
+            <div class="hl-number">1075</div>
+            <h2 class="hl-title" data-i18n="hl1075Title">National Health Helpline</h2>
+            <p class="hl-desc" data-i18n="hl1075Desc">Government health policies, epidemic information, immunization queries, and Ayushman Bharat guidance.</p>
+            <a href="tel:1075" class="btn btn-outline">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+              <span data-i18n="callNow">Call 1075</span>
+            </a>
+          </div>
+
+          <!-- 14416 -->
+          <div class="helpline-card">
+            <div class="hl-badge">Mental Health Support</div>
+            <div class="hl-number">14416</div>
+            <h2 class="hl-title" data-i18n="hl14416Title">Tele-MANAS Mental Health</h2>
+            <p class="hl-desc" data-i18n="hl14416Desc">Free, 24x7 confidential psychological counseling and emotional support in multiple Indian regional languages.</p>
+            <a href="tel:14416" class="btn btn-outline">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+              <span data-i18n="callNow">Call 14416</span>
+            </a>
+          </div>
+
+          <!-- 112 -->
+          <div class="helpline-card">
+            <div class="hl-badge">Unified Emergency</div>
+            <div class="hl-number">112</div>
+            <h2 class="hl-title" data-i18n="hl112Title">All-India Emergency Number</h2>
+            <p class="hl-desc" data-i18n="hl112Desc">Integrated emergency service connecting Police, Fire, and Ambulance across all States and UTs.</p>
+            <a href="tel:112" class="btn btn-outline">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+              <span data-i18n="callNow">Call 112</span>
+            </a>
+          </div>
+
+          <!-- 1098 -->
+          <div class="helpline-card">
+            <div class="hl-badge">Child Support</div>
+            <div class="hl-number">1098</div>
+            <h2 class="hl-title" data-i18n="hl1098Title">Childline Emergency</h2>
+            <p class="hl-desc" data-i18n="hl1098Desc">24-hour emergency helpline for children in need of medical care, rescue, shelter, and protection.</p>
+            <a href="tel:1098" class="btn btn-outline">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+              <span data-i18n="callNow">Call 1098</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">GramHealth <span>| ग्राम स्वास्थ्य</span></div>
+          <p class="footer-text" data-i18n="footerMission">An open-source, hackathon-built rural health access portal designed for offline resilience, patient privacy, and transparent community guidance.</p>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-heading" data-i18n="footerQuickLinks">Quick Links</h3>
+          <ul>
+            <li><button type="button" class="footer-btn-link" onclick="app.switchTab('home')" data-i18n="navHome">Dashboard</button></li>
+            <li><button type="button" class="footer-btn-link" onclick="app.switchTab('screening')" data-i18n="navScreening">Symptom Screener</button></li>
+            <li><button type="button" class="footer-btn-link" onclick="app.switchTab('facilities')" data-i18n="navFacilities">Find Health Centers</button></li>
+            <li><button type="button" class="footer-btn-link" onclick="app.switchTab('education')" data-i18n="navEducation">Health Education</button></li>
+            <li><button type="button" class="footer-btn-link" onclick="app.switchTab('reminders')" data-i18n="navReminders">Reminders &amp; Camps</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-disclaimer-box">
+        <p data-i18n="footerDisclaimer"><strong>Medical &amp; Prototype Notice:</strong> GramHealth is an educational prototype and does not provide clinical diagnoses, prescriptive medical treatments, or formal doctor consultations. No data is stored externally. In case of an emergency, call 108 immediately. Map data &copy; OpenStreetMap contributors.</p>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 GramHealth Project. Built with HTML, CSS &amp; Vanilla JavaScript. Open access under MIT License.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="app.js"></script>
+</body>
+</html>
